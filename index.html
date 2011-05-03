@@ -45,9 +45,10 @@
 
             <h3>The options</h3>
             <ul>
-                <li><b>color</b>: true (for colour noise) or false (for greyscale noise)</li>
+                <li><b>color</b>: true (for colour noise) or false (for greyscale noise). Defaults to false.</li>
+                <li><b>sepia</b>: true or false. Adds a sepia tone to the noise. Defaults to false.</li>
                 <li><b>size</b>: 0 to 500. Refers to the size of the generated image. This defaults to 100, which generates a 100x100 pixel image. This should be large enough to not notice repeats, but small enough that it doesn't take too long to draw. The limit of 500 is fairly arbitrary, when I tested this, it took around 1.2 seconds to run the function with a 500x500 pixel image, which I think is probably actually too long to add to your page load time really. With a 100x100 pixel image, it takes around 50ms to run the function, so should be satisfactorily unnoticeable. </li>
-                <li><b>opacity</b>: 0 to 1. Refers to the opacity of the generated image, or essentially, how much noise you see on the page. This defaults to 0.075, which applies a very subtle amount of noise.</li>
+                <li><b>opacity</b>: 0 to 1. Refers to the opacity of the generated image, or essentially, how much noise you see on the page. This defaults to 0.075, which applies a subtle amount of noise. Values higher than about 0.15 don't look good, unfortunately.</li>
                 <li>The HTML isn't pretty (if that matters)</li>
             </ul>
 
@@ -75,7 +76,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js" type="text/javascript"></script>
 	<script type="text/javascript" src="js/jquery.fuzz.js"></script>
     <script type="text/javascript">
-        $('#main, header, footer').fuzz();
+        $('#main, header, footer').fuzz({sepia:true});
     </script>
 </body>
 </html>
