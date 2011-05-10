@@ -1,0 +1,30 @@
+Fuzz
+====
+
+v1.0
+Author: Chris How Kin Sang
+URL: http://fuzz.chks.me
+Twitter: @chrishks
+
+This is mainly just a fun little plugin I made to learn some JavaScript.
+
+What does it do?
+----------------
+
+Fuzz randomly generates a background image noise effect on a web page using the canvas element. It's a small plugin (only 2KB minified) and in most cases runs very quickly.
+
+Fuzz requires jQuery and will only display noise in a canvas capable browser. You can still include it in browsers which can't display canvas, but it won't do anything.
+
+You could use it add subtle noise to classily enhance your page or alternatively pollute it with random blocks!
+
+Usage
+-----
+
+Select which elements you want noise on using jQuery. Optionally pass in some parameters. See http://fuzz.chks.me for more details.
+
+$('element').fuzz({options: option});
+
+Notes
+-----
+
+It seems you can't combine this with a background image or gradient on the same element, though in theory, with CSS3, you should be able to.
