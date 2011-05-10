@@ -6,14 +6,15 @@
 
 (function ($) {
 
-    $.fn.fuzz = function(options) {
+    $.fn.fuzz = function (options) {
 
         // default settings
         var defaults = {
             color: false,
             sepia: false,
             size: 100,
-            opacity: 0.075
+            opacity: 0.075,
+            pixel: 1
             },
         settings = $.extend({}, defaults, options);
 
@@ -28,35 +29,46 @@
 
             // create a new canvas
             $('<canvas id="jquery-fuzz">').appendTo($('body')).hide();
-            var canvasBg = document.getElementById('jquery-fuzz'),
-                bgCtx = canvasBg.getContext('2d'),
+            var fuzzCanvas = document.getElementById('jquery-fuzz'),
+                fuzzContext = fuzzCanvas.getContext('2d'),
                 x, y,
                 r, g, b,
-                a = settings.opacity;
+                a = settings.opacity,
+                px = Math.round(settings.pixel);
 
             // prevent extremely large sizes
             if (settings.size > 500) {
                 settings.size = 500;
             }
 
-            canvasBg.width = settings.size;
-            canvasBg.height = settings.size;
+            // prevent pixels larger than the canvas
+            if (px > settings.size) {
+                px = settings.size;
+            }
 
-            for (x = 0; x < canvasBg.width; x++) {
+            // prevent pixels less than 1px
+            if (px < 1) {
+                px = 1;
+            }
 
-                for (y = 0; y < canvasBg.width; y++) {
+            fuzzCanvas.width = settings.size;
+            fuzzCanvas.height = settings.size;
+
+            for (x = 0; x < fuzzCanvas.width; x += px) {
+
+                for (y = 0; y < fuzzCanvas.width; y += px) {
 
                     r = Math.floor(Math.random() * 255);
                     g = Math.floor(Math.random() * 255);
                     b = Math.floor(Math.random() * 255);
 
                     if (!settings.color) {
-                        bgCtx.fillStyle = 'rgba(' + r + ', ' + r + ', ' + r + ', ' + a + ')';
+                        fuzzContext.fillStyle = 'rgba(' + r + ', ' + r + ', ' + r + ', ' + a + ')';
                     } else {
-                        bgCtx.fillStyle = 'rgba(' + r + ', ' + g + ', ' + b + ', ' + a + ')';
+                        fuzzContext.fillStyle = 'rgba(' + r + ', ' + g + ', ' + b + ', ' + a + ')';
                     }
 
-                    bgCtx.fillRect(x, y, 1, 1);
+                    fuzzContext.fillRect(x, y, px, px);
                 }
 
             }
@@ -64,7 +76,7 @@
             // optionally add a sepia tone
             if (settings.sepia) {
 
-                var imgData = bgCtx.getImageData(0, 0, canvasBg.width, canvasBg.height),
+                var imgData = fuzzContext.getImageData(0, 0, fuzzCanvas.width, fuzzCanvas.height),
 				pxData = imgData.data, // put in an array to easily iterate over it
 				pxLength = pxData.length;
 
@@ -84,7 +96,7 @@
 
                 imgData.data = pxData; // now we need to put the array back in the object
 
-                bgCtx.putImageData(imgData, 0, 0);
+                fuzzContext.putImageData(imgData, 0, 0);
 
             }
 
@@ -95,19 +107,19 @@
                 if ($(this).css('backgroundImage')) {
 
                     var currentBgImg = $(this).css('backgroundImage'),
-                            noise = 'url(' + canvasBg.toDataURL('image/png') + ')',
+                            noise = 'url(' + fuzzCanvas.toDataURL('image/png') + ')',
                             newBgImgVar = currentBgImg + ', ' + noise;
 
                     $(this).css('backgroundImage', newBgImgVar);
 
                 } else {
 
-                    this.style.backgroundImage = 'url(' + canvasBg.toDataURL('image/png') + ')';
+                    this.style.backgroundImage = 'url(' + fuzzCanvas.toDataURL('image/png') + ')';
 
                 }
             });
             
-            $(canvasBg).remove();
+            $(fuzzCanvas).remove();
 
         }
 
