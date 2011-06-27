@@ -193,6 +193,12 @@ div#main {
     border-bottom: 2px solid #7b2860;
 }
 
+div#main section.container_12 {
+    background: #fafafa;
+    box-shadow: 0 0 16px rgba(0,0,0,.5);
+    border-radius: 10px;
+}
+
 h1 {
     font-size: 64px;
     line-height: 72px;
@@ -220,6 +226,7 @@ p, ul {
 p.code {
     font-family: Consolas, "Courier New", monospace;
     text-indent: 20px;
+    color: #742b63;
 }
 
 b {
@@ -228,21 +235,23 @@ b {
 
 /* examples */
 div.example {
-    background: #fff;
-    height: 200px;
-    width: 100%;
-    color: #cf99be;
+    background: #dddddd;
+    height: 32px;
+    width: 260px;
+    color: #742b63;
     padding: 20px;
-    font-size: 32px;
-    font-weight: bold;
-    line-height: 48px;
+    font-size: 24px;
+    font-family: 'Lobster', sans-serif;
+    line-height: 32px;
+    text-align: center;
+    vertical-align: middle;
     margin-bottom: 24px;
     -moz-border-radius: 10px;
     -webkit-border-radius: 10px;
     border-radius: 10px;
-    border: 2px solid #2C083F;
-    text-shadow: 1px 1px 1px #333;
-    box-shadow: inset 0 0 25px rgba(0,0,0,0.75);
+    text-shadow: 1px 1px 1px #ffffff;
+    box-shadow: inset 0 0 25px rgba(0,0,0,0.75), 0 2px 3px rgba(0,0,0,.3);
+    cursor: pointer;
 }
 
 

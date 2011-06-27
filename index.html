@@ -82,12 +82,14 @@
                     <li>At the moment, the greyscale noise is just grey but I would like to add an option where you can have noise in a particular colour/hue.</li>
                     <li>I tried in vain to use the British spelling for 'colour' in the plugin but unfortunately it just confused me. So it's 'color'.</li>
                     <li>The HTML isn't pretty (if that matters)</li>
-                    <li>This is my first jQuery plugin, so there may be a few things that I haven't considered or that could be improved. I'd love to hear them.</li>
+                    <li>This is my first jQuery plugin, so there may be a few things that I haven't considered or that could be improved (also: lower expectations). I'd love to hear them.</li>
                 </ul>
             </article>
 
             <section class="grid_4">
                 <h2>Examples</h2>
+
+                <p>Click on the buttons to change the fuzz background of this page!</p>
 
                 <div class="example" id="default">
                     The default
@@ -135,18 +137,45 @@
 	</footer>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js" type="text/javascript"></script>
-	<script type="text/javascript" src="js/jquery.fuzz.min.js"></script>
+	<script type="text/javascript" src="js/jquery.fuzz.js"></script>
     <script type="text/javascript">
         // backgrounds
         $('#main').fuzz();
         $('header, footer').fuzz({color:true, pixel: 8, opacity: 0.06, size: 200});
 
         // examples
-        $('#default').fuzz();
-        $('#subtle').fuzz({color:true, opacity: 0.12});
-        $('#grey').fuzz({color: false, pixel: 10, opacity:0.2, size: 200});
-        $('#sepia').fuzz({color: true, pixel: 10, opacity:0.33, size: 200, sepia: true});
-        $('#horrorshow').fuzz({color: true, pixel: 12, opacity:0.66, size: 200});
+        $('#default').fuzz().click(function () {
+            underline(this);
+            $('#main').css({backgroundImage: 'none'}).fuzz();
+        });
+        $('#subtle').fuzz({color:true, opacity: 0.12}).click(function () {
+            underline(this);
+            $('#main').css({backgroundImage: 'none'}).fuzz({color:true, opacity: 0.12});
+        });
+        $('#grey').fuzz({color: false, pixel: 10, opacity:0.2, size: 200}).click(function () {
+            underline(this);
+            $('#main').css({backgroundImage: 'none'}).fuzz({color: false, pixel: 10, opacity:0.1, size: 200});
+        });
+        $('#sepia').fuzz({color: true, pixel: 10, opacity:0.33, size: 200, sepia: true}).click(function () {
+            underline(this);
+            $('#main').css({backgroundImage: 'none'}).fuzz({color: true, pixel: 10, opacity:0.1, size: 200, sepia: true});
+        });
+        $('#horrorshow').fuzz({color: true, pixel: 12, opacity:0.66, size: 200}).click(function () {
+            underline(this);
+            $('#main').css({backgroundImage: 'none'}).fuzz({color: true, pixel: 12, opacity:0.66, size: 200});
+        });
+
+        function underline(el) {
+
+            $('.example').css({'textDecoration' : 'none'});
+            $(el).css({'textDecoration' : 'underline'});
+
+        }
+
+
+
+
+
     </script>
     <script type="text/javascript">
 
